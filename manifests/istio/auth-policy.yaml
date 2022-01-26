@@ -1,0 +1,16 @@
+apiVersion: authentication.istio.io/v1beta1
+kind: Policy
+metadata:
+  name: auth-policy
+spec:
+  targets:
+  - name: service1
+  - name: service2
+  - name: service3
+  - name: service4
+  - name: service5
+  origins:
+  - jwt:
+      issuer: "{YOUR_DOMAIN}"
+      jwksUri: "{YOUR_JWT_URI}"
+  principalBinding: USE_ORIGIN

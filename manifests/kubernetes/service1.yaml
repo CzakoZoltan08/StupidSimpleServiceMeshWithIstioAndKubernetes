@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service1
+  labels:
+    app: service1
+spec:
+  selector:
+    matchLabels:
+      app: service1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: service1
+        version: v1
+    spec:
+      containers:
+      - image: zoliczako/sssm-service1:1.0.0
+        imagePullPolicy: Always
+        name: service1
+        ports:
+          - containerPort: 5001
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service1
+  labels:
+    app: service1
+spec:
+  ports:
+  - name: http
+    port: 5001
+    targetPort: 5001
+  selector:
+    app: service1

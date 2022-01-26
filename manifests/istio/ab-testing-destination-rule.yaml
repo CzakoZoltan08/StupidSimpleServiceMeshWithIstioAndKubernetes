@@ -1,0 +1,10 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: service2
+spec:
+  host: service2
+  trafficPolicy:
+    loadBalancer:
+      consistentHash:
+        httpHeaderName: version

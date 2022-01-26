@@ -1,0 +1,34 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: sssm-virtual-services
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - http-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /service1
+    route:
+    - destination:
+        host: service1
+        port:
+          number: 80
+  - match:
+    - uri:
+        prefix: /service2
+    route:
+    - destination:
+        host: service2
+        port:
+          number: 80
+  - match:
+    - uri:
+        prefix: /service2
+    route:
+    - destination:
+        host: service2
+        port:
+          number: 80
